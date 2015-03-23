@@ -1,9 +1,11 @@
-package ua.epam.rd.service;
+package ua.epam.rd.pizzadeliveryservice.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import ua.epam.rd.pizzadeliveryservice.Order;
-import ua.epam.rd.pizzadeliveryservice.Pizza;
+import ua.epam.rd.pizzadeliveryservice.entity.Order;
+import ua.epam.rd.pizzadeliveryservice.entity.Pizza;
 
 public interface OrderService {
 	
@@ -13,8 +15,7 @@ public interface OrderService {
 
 	public Order createNewOrder();
 
-	public void addItems(Pizza... pizza);
-	
 	public void placeOrder(Order order);
+
 
 }
