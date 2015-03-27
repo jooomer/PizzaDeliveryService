@@ -4,11 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import ua.epam.rd.pizzadeliveryservice.repository.OrderRepository;
 import ua.epam.rd.pizzadeliveryservice.service.OrderService;
 
-public class Order {
+@Component("newOrder")
+//@OrderAnnotation("newOrder")
+@Scope("prototype")
+public class Order {// implements InitializingBean {
 	
+	@Autowired
 	private OrderRepository orderRepository;
 	
 	private Long id;
@@ -90,5 +100,14 @@ public class Order {
 				+ ";    Date: " + date 
 				+ ";    Price: " + price;
 	}
+
+//	@Override
+//	public void afterPropertiesSet() throws Exception {
+//		System.out.println("Init bean : afterPropertiesSet()");
+//	}
+	
+//	public void init() {
+//		System.out.println("Init bean : init()");
+//	}
 
 }

@@ -1,13 +1,19 @@
 package ua.epam.rd.pizzadeliveryservice.repository;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.stereotype.Repository;
 
 import ua.epam.rd.pizzadeliveryservice.entity.Order;
 import ua.epam.rd.pizzadeliveryservice.service.PizzaService;
 
+@Repository
 public class TestOrderRepositoryImpl implements OrderRepository {
 
-	private PizzaService pizzaService;
+	private Map<Long, Order> orders = new HashMap<>();
+	
+//	private PizzaService pizzaService;
 	private Long counterId = 0L;
 	
 	@Override
@@ -31,13 +37,13 @@ public class TestOrderRepositoryImpl implements OrderRepository {
 		this.orders.put(counterId, order);		
 	}
 
-	public PizzaService getPizzaService() {
-		return pizzaService;
-	}
-
-	public void setPizzaService(PizzaService pizzaService) {
-		this.pizzaService = pizzaService;
-	}
+//	public PizzaService getPizzaService() {
+//		return pizzaService;
+//	}
+//
+//	public void setPizzaService(PizzaService pizzaService) {
+//		this.pizzaService = pizzaService;
+//	}
 
 	public Long getCounterId() {
 		return counterId;

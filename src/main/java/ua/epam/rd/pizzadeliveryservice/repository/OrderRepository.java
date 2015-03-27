@@ -9,8 +9,6 @@ import ua.epam.rd.pizzadeliveryservice.entity.Pizza;
 
 public interface OrderRepository {
 
-	Map<Long, Order> orders = new HashMap<>();
-	
 	public Map<Long, Order> getAllOrders();
 
 	public Order getOrderById(Long id);
@@ -18,7 +16,5 @@ public interface OrderRepository {
 	public Long getNewOrderId();
 
 	public void placeOrder(Order order);
-
-//	public void addItem(Pizza pizza);
 
 }

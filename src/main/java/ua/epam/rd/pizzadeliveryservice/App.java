@@ -57,6 +57,8 @@ public class App {
 		
 		orders.stream().forEach(System.out::println);
 		
+//		System.out.println(appContext.cl);
+		
 	}
 
 }
