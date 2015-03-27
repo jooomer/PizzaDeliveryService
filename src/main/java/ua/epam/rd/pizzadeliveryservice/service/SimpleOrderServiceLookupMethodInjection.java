@@ -9,16 +9,21 @@ import java.util.Map.Entry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Service;
 
 import ua.epam.rd.pizzadeliveryservice.entity.Order;
 import ua.epam.rd.pizzadeliveryservice.repository.OrderRepository;
 
+//@Service
 public abstract class SimpleOrderServiceLookupMethodInjection implements OrderService {
 	
 	private static final Logger logger = LogManager.getLogger(SimpleOrderServiceLookupMethodInjection.class);
 
+	@Autowired
 	private OrderRepository orderRepository;
 	
 	@Override

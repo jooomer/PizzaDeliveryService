@@ -29,7 +29,6 @@ public class App {
 				new ClassPathXmlApplicationContext("springConfig.xml", "springConfig-LoockupMethodInjection.xml");
 		logger.debug("ApplicationContext is loaded.");
 		
-//		PizzaService pizzaService = new SimplePizzaService();
 		PizzaService pizzaService = appContext.getBean("pizzaService", PizzaService.class);
 		logger.debug("PizzaService bean is gotten.");
 		
@@ -37,7 +36,6 @@ public class App {
 		
 		List<Pizza> pizzas = pizzaService.getAllPizzas();
 		
-//		OrderService orderService = new SimpleOrderService();
 		OrderService orderService = appContext.getBean("orderService", OrderService.class);
 		
 		
@@ -56,6 +54,8 @@ public class App {
 		List<Order> orders = orderService.getAllOrders();
 		
 		orders.stream().forEach(System.out::println);
+		
+//		System.out.println(appContext.cl);
 		
 	}
 

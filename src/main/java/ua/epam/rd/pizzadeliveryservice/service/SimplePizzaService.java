@@ -2,13 +2,18 @@ package ua.epam.rd.pizzadeliveryservice.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import ua.epam.rd.pizzadeliveryservice.entity.Pizza;
 import ua.epam.rd.pizzadeliveryservice.entity.PizzaType;
 import ua.epam.rd.pizzadeliveryservice.repository.PizzaRepository;
 import ua.epam.rd.pizzadeliveryservice.repository.TestPizzaRepositoryImpl;
 
+@Service("pizzaService")
 public class SimplePizzaService implements PizzaService {
-
+	
+	@Autowired
 	private PizzaRepository pizzaRepository;
 	
 //	public SimplePizzaService() {
