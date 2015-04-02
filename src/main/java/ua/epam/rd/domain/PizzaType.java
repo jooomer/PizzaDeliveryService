@@ -1,4 +1,4 @@
-package ua.epam.rd.pizzadeliveryservice.entity;
+package ua.epam.rd.domain;
 
 public enum PizzaType {
 

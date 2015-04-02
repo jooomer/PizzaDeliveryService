@@ -1,10 +1,10 @@
-package ua.epam.rd.pizzadeliveryservice.repository;
+package ua.epam.rd.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.epam.rd.pizzadeliveryservice.entity.Pizza;
-import ua.epam.rd.pizzadeliveryservice.entity.PizzaType;
+import ua.epam.rd.domain.Pizza;
+import ua.epam.rd.domain.PizzaType;
 
 public class TestPizzaRepositoryImpl implements PizzaRepository {
 
@@ -36,6 +36,12 @@ public class TestPizzaRepositoryImpl implements PizzaRepository {
 
 	public void setPizzas(List<Pizza> pizzas) {
 		this.pizzas = pizzas;
+	}
+
+	@Override
+	public Long save(Pizza pizza) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

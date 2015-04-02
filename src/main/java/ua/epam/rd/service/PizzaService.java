@@ -1,9 +1,9 @@
-package ua.epam.rd.pizzadeliveryservice.service;
+package ua.epam.rd.service;
 
 import java.util.List;
 
-import ua.epam.rd.pizzadeliveryservice.entity.Pizza;
-import ua.epam.rd.pizzadeliveryservice.entity.PizzaType;
+import ua.epam.rd.domain.Pizza;
+import ua.epam.rd.domain.PizzaType;
 
 public interface PizzaService {
 	
@@ -14,5 +14,7 @@ public interface PizzaService {
 	String pizzaToString(Pizza pizza);
 	
 	void printAllPizzas();
+
+	void save(Pizza pizza);
 
 }
