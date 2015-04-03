@@ -2,6 +2,8 @@ package ua.epam.rd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -55,18 +57,21 @@ public class AppJpaRunner {
 		order1.addProduct(pizzas.get(0));
 		order1.addProduct(pizzas.get(1));
 		order1.setStatus(Status.NEW);
+		order1.setDate(new Date(new GregorianCalendar(2000, 0, 21).getTimeInMillis()));
 //		orderRepository.save(order1); // should not be persisted
 		
 		Order order2 = new Order();
 		order2.addProduct(pizzas.get(0));
 		order2.addProduct(pizzas.get(2));
 		order2.setStatus(Status.NEW);
+		order2.setDate(new Date(new GregorianCalendar(2008, 5, 10).getTimeInMillis()));
 //		orderRepository.save(order2); // should not be persisted
 		
 		Order order3 = new Order();
 		order3.addProduct(pizzas.get(1));
 		order3.addProduct(pizzas.get(2));
 		order3.setStatus(Status.NEW);
+		order3.setDate(new Date(new GregorianCalendar().getTimeInMillis()));
 //		orderRepository.save(order2); // should not be persisted
 		
 		// create Customers
@@ -82,7 +87,9 @@ public class AppJpaRunner {
 		
 		
 		// get some orders
-		List<Order> orders = orderRepository.findCustomerOrdersForPeriod(customer2, null, null);
+		Date dateFrom = new Date(new GregorianCalendar(2001, 0, 1).getTimeInMillis());
+		Date dateTo = new Date(new GregorianCalendar().getTimeInMillis());
+		List<Order> orders = orderRepository.findCustomerOrdersForPeriod(customer1, dateFrom, dateTo);
 		for (Order order : orders) {
 			System.out.println("Order: " + order);
 		}

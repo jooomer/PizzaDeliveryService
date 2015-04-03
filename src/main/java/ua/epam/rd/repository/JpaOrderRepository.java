@@ -6,6 +6,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +52,37 @@ public class JpaOrderRepository implements OrderRepository {
 			Date dateFrom, Date dateTo) {
 
 		// Criteria
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Order> query = builder.createQuery(Order.class);
 		
+		Root<Order> rootOrder = query.from(Order.class);
+		
+		ParameterExpression<Customer> parameterCustomer = builder.parameter(Customer.class);
+		ParameterExpression<Date> parameterDateFrom = builder.parameter(Date.class);
+		ParameterExpression<Date> parameterDateTo = builder.parameter(Date.class);
+		query.select(rootOrder).where(
+				builder.equal(rootOrder.get("customer"), parameterCustomer),
+				builder.greaterThan(rootOrder.get("date"), parameterDateFrom),
+				builder.lessThan(rootOrder.get("date"), parameterDateTo)
+				);
+		
+		TypedQuery<Order> typedQuery = em.createQuery(query);
+		
+		typedQuery.setParameter(parameterCustomer, customer);
+		typedQuery.setParameter(parameterDateFrom, dateFrom);
+		typedQuery.setParameter(parameterDateTo, dateTo);
+		
+		List<Order> orders = typedQuery.getResultList();
+		
+		return orders;
 		
 		
 		// JPQL
-//		String qlString = "SELECT o FROM Order o WHERE o.customer.id = " + customer.getId()
-//				+ "AND o.date BETWEEN " + dateFrom + " AND " + dateTo;
+//		String qlString = "SELECT o FROM Order o WHERE o.customer.id = " + customer.getId();
 //		System.out.println(qlString);
 //		TypedQuery<Order> typedQuery = em.createQuery(qlString, Order.class);
-//		return typedQuery.getResultList();
+//		List<Order> orders = typedQuery.getResultList();
+//		return orders;
 	}
 
 }
