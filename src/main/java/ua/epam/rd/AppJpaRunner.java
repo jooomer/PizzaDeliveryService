@@ -42,7 +42,7 @@ public class AppJpaRunner {
 	public static void main(String[] args) {
 		
 		ConfigurableApplicationContext appContextRepository = 
-				new ClassPathXmlApplicationContext("springConfig.xml");
+				new ClassPathXmlApplicationContext("springConfigXML.xml");
 		logger.debug("ApplicationContext is created.");
 
 		pizzaRepository = appContextRepository.getBean("pizzaRepository", PizzaRepository.class);

@@ -21,7 +21,7 @@ public class JpaPizzaRepository implements PizzaRepository {
 	
 	private static final Logger logger = LogManager.getLogger(JpaPizzaRepository.class);
 
-	@PersistenceContext(name = "HibernateMySQL")
+	@PersistenceContext(name = "HibernateHSQL")
 	private EntityManager em;
 		
 	public JpaPizzaRepository() {
@@ -53,7 +53,7 @@ public class JpaPizzaRepository implements PizzaRepository {
 
 	@Override
 	public Pizza getPizzaById(Long i) {
-		return em.find(Pizza.class, new Long(i));
+		return em.find(Pizza.class, i);
 //		return em.getReference(Pizza.class, i);
 	}
 
