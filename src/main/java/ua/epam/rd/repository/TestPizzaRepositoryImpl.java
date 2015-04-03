@@ -44,4 +44,22 @@ public class TestPizzaRepositoryImpl implements PizzaRepository {
 		return null;
 	}
 
+	@Override
+	public void delete(Pizza pizza) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Pizza getPizzaById(Long i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(Pizza pizza) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -15,8 +15,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +41,7 @@ public class Order implements Serializable {
 	
 	private String name;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 
 	private Double price;
@@ -44,12 +49,19 @@ public class Order implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "order", cascade = {
+				CascadeType.PERSIST,
+				CascadeType.MERGE,
+				CascadeType.REFRESH })
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	
-
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+	
 	public Order() {
 		date = new Date(Calendar.getInstance().getTimeInMillis());
+//		date = new Date();
 //		name = id.toString() + " - " + date;
 	}
 	
@@ -100,6 +112,7 @@ public class Order implements Serializable {
 	
 	public String toString() {
 		return "Order:   Id: " + id 
+				+ "; 	Customer: " + customer.getId()
 				+ ";    Name: " + name 
 				+ ";    Date: " + date 
 				+ ";    Price: " + price;
@@ -125,13 +138,13 @@ public class Order implements Serializable {
 		this.orderItems = orderItems;
 	}
 
-//	@Override
-//	public void afterPropertiesSet() throws Exception {
-//		System.out.println("Init bean : afterPropertiesSet()");
-//	}
-	
-//	public void init() {
-//		System.out.println("Init bean : init()");
-//	}
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 
 }

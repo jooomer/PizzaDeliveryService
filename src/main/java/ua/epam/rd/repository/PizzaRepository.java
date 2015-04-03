@@ -6,13 +6,24 @@ import java.util.List;
 import ua.epam.rd.domain.Pizza;
 import ua.epam.rd.domain.PizzaType;
 
+/**
+ * CRUD - Create, Retrieve, Update, Delete
+ */
 public interface PizzaRepository { //extends JpaRepository<Pizza, Long> {
 	
-	List<Pizza> getAllPizzas();
+	// Create
+	Long save(Pizza pizza);
 
+	// Retrieve
+	Pizza getPizzaById(Long i);
+	List<Pizza> getAllPizzas();
 	List<Pizza> getPizzaByType(PizzaType type);
 
-	Long save(Pizza pizza);
+	// Update
+	void update(Pizza pizza);
+
+	// Delete
+	void delete(Pizza pizza);
 
 	
 }

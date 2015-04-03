@@ -1,15 +1,27 @@
 package ua.epam.rd.repository;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+import ua.epam.rd.domain.Customer;
 import ua.epam.rd.domain.Order;
-import ua.epam.rd.domain.Pizza;
 
+/**
+ * CRUD - Create, Retrieve, Update, Delete
+ */
 public interface OrderRepository { //extends JpaRepository<Order, Long> {
 
-	public Long save(Order order);
+	// Create
+	Long save(Order order);
 
+	// Retrieve
+	Order getOrderById(Long id);
+	List<Order> findCustomerOrdersForPeriod(Customer customer, Date dateFrom, Date dateTo);
+		
+	// Update
+	void update(Order order);
+
+	// Delete
+	void delete(Order order);
 	
 }

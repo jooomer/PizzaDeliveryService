@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import ua.epam.rd.domain.Pizza;
 import ua.epam.rd.domain.PizzaType;
 
+@Transactional
 @Repository("pizzaRepository")
 public class JpaPizzaRepository implements PizzaRepository {
 	
@@ -38,11 +39,28 @@ public class JpaPizzaRepository implements PizzaRepository {
 		return null;
 	}
 	
-	@Transactional
 	@Override
 	public Long save(Pizza pizza) {
 		em.persist(pizza);
 		return pizza.getId();
+	}
+
+	@Override
+	public void delete(Pizza pizza) {
+		pizza = em.find(Pizza.class, pizza.getId());
+		em.remove(pizza);
+	}
+
+	@Override
+	public Pizza getPizzaById(Long i) {
+		return em.find(Pizza.class, new Long(i));
+//		return em.getReference(Pizza.class, i);
+	}
+
+	@Override
+	public void update(Pizza pizza) {
+		em.merge(pizza);
+		
 	}
 
 }
