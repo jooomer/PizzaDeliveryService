@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +23,9 @@ public class Customer {
 	
 	private String name;
 	
-	@Column(name = "ship_address")
-	private String shipAddress;
+	@Column(name = "delivery_address")
+	@Embedded
+	private Address deliveryAddress;
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
 	private Set<Order> orders = new LinkedHashSet<>();
@@ -49,20 +51,20 @@ public class Customer {
 		this.name = name;
 	}
 
-	public String getShipAddress() {
-		return shipAddress;
-	}
-
-	public void setShipAddress(String shipAddress) {
-		this.shipAddress = shipAddress;
-	}
-
 	public Set<Order> getOrders() {
 		return orders;
 	}
 
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
+	}
+
+	public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 	
 }

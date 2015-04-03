@@ -21,7 +21,7 @@ import ua.epam.rd.domain.Order;
 import ua.epam.rd.domain.OrderItem;
 import ua.epam.rd.domain.Pizza;
 import ua.epam.rd.domain.PizzaType;
-import ua.epam.rd.domain.Souce;
+import ua.epam.rd.domain.Address;
 import ua.epam.rd.domain.Status;
 import ua.epam.rd.repository.CustomerRepository;
 import ua.epam.rd.repository.OrderRepository;
@@ -78,10 +78,14 @@ public class AppJpaRunner {
 		Customer customer1 = new Customer();
 		customer1.addOrder(order1);
 		customer1.addOrder(order2);
+		customer1.setName("Alex");
+		customer1.setDeliveryAddress(new Address("Kiev", "Kreshchatyk", "12-A"));
 		customerRepository.save(customer1); // persist orders by cascade
 		
 		Customer customer2 = new Customer();
 		customer2.addOrder(order3);
+		customer1.setName("Max");
+		customer2.setDeliveryAddress(new Address("Kiev", "Artema", "8"));
 		customerRepository.save(customer2); // persist orders by cascade
 		
 		

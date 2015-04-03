@@ -39,12 +39,10 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String name;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 
-	private Double price;
+	private Double price = 0.;
 	
 	@Enumerated(EnumType.STRING)
 	private Status status;
@@ -61,17 +59,11 @@ public class Order implements Serializable {
 	
 	public Order() {
 		date = new Date(Calendar.getInstance().getTimeInMillis());
-//		date = new Date();
-//		name = id.toString() + " - " + date;
-	}
-	
-	public Order(Long id, Date date) {
-		this.id = id;
-		this.name = date.toString() + " - " + id;
-		this.date = date;
 	}
 	
 	public void addProduct(Pizza pizza) {
+		System.out.println("--------------- Price: " + pizza.getPrice());
+		price = price + pizza.getPrice();
 		OrderItem orderItem = new OrderItem();
 		orderItem.setPizza(pizza);
 		orderItem.setOrder(this);
@@ -94,14 +86,6 @@ public class Order implements Serializable {
 		this.date = date;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public Double getPrice() {
 		return price;
 	}
@@ -113,7 +97,6 @@ public class Order implements Serializable {
 	public String toString() {
 		return "Order:   Id: " + id 
 				+ "; 	Customer: " + customer.getId()
-				+ ";    Name: " + name 
 				+ ";    Date: " + date 
 				+ ";    Price: " + price;
 	}
