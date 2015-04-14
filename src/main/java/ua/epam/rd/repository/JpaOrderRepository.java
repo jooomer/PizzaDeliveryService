@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,24 +23,24 @@ import ua.epam.rd.domain.Order;
 @Repository("orderRepository")
 public class JpaOrderRepository implements OrderRepository {
 
-	@PersistenceContext(name = "HibernateMySQL")
+	@PersistenceContext(name = "HibernateMySQL") //, type = PersistenceContextType.EXTENDED)
 	private EntityManager em;
 	
+//	@Override
+//	public Long save(Order order) {
+//		em.persist(order);
+//		return order.getId();
+//	}
+
 	@Override
-	public Long save(Order order) {
+	public Order save(Order order) {
 		em.persist(order);
-		return order.getId();
+		return order;
 	}
 
 	@Override
 	public void update(Order order) {
 		em.merge(order);
-	}
-
-	@Override
-	public Order getOrderById(Long id) {
-		return em.find(Order.class, new Long(id));
-		
 	}
 
 	@Override
@@ -84,5 +85,20 @@ public class JpaOrderRepository implements OrderRepository {
 //		List<Order> orders = typedQuery.getResultList();
 //		return orders;
 	}
+
+	@Override
+	public List<Order> getAllOrders() {
+		TypedQuery<Order> query = em.createQuery("select o from Order o", Order.class);
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public Order getOrderById(Long id) {
+		Order order = em.find(Order.class, id);
+		order.getItems().size();
+		return em.find(Order.class, id);
+	}
+
 
 }

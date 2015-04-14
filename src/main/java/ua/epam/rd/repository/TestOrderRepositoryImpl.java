@@ -15,7 +15,7 @@ import ua.epam.rd.service.PizzaService;
 public class TestOrderRepositoryImpl implements OrderRepository {
 
 	@Override
-	public Long save(Order order) {
+	public Order save(Order order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -41,6 +41,12 @@ public class TestOrderRepositoryImpl implements OrderRepository {
 	@Override
 	public List<Order> findCustomerOrdersForPeriod(Customer customer,
 			Date daterom, Date dateTo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Order> getAllOrders() {
 		// TODO Auto-generated method stub
 		return null;
 	}

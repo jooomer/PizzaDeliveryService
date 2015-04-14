@@ -6,8 +6,8 @@ import org.junit.runners.MethodSorters;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@FixMethodOrder(MethodSorters.JVM)
+@RunWith(SpringJUnit4ClassRunner.class) // runs spring framework container
+@FixMethodOrder(MethodSorters.JVM) // not required
 abstract class RepositoryTestsTemplate extends AbstractTransactionalJUnit4SpringContextTests{
 
 }

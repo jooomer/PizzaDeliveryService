@@ -18,6 +18,7 @@
         <property name="location" value="jdbc.properties" />
     </bean>
     
+    <!-- Connection pool -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${driver}"/>        
         <property name="url" value="${url}"/>        

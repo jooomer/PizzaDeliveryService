@@ -23,6 +23,8 @@ public class Customer {
 	
 	private String name;
 	
+	private String email;
+	
 	@Column(name = "delivery_address")
 	@Embedded
 	private Address deliveryAddress;
@@ -65,6 +67,14 @@ public class Customer {
 
 	public void setDeliveryAddress(Address deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

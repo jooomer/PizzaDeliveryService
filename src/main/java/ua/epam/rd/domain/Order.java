@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,10 +22,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,21 +60,38 @@ public class Order implements Serializable {
 				CascadeType.REFRESH })
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	
+	@ElementCollection
+	@CollectionTable(name = "order_items_map",
+		joinColumns = @JoinColumn(name = "order_id"))
+	@MapKeyJoinColumn(name = "pizza_id", referencedColumnName = "id")
+	@Column(name = "")
+	private Map<Pizza, Integer> items = new HashMap<>();
+	
+	@Version // Optimistic blocking
+	private Long version;
+	
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
 	public Order() {
 		date = new Date(Calendar.getInstance().getTimeInMillis());
+		this.status = Status.NEW;
 	}
 	
-	public void addProduct(Pizza pizza) {
+	public void addPizza(Pizza pizza) {
 		System.out.println("--------------- Price: " + pizza.getPrice());
 		price = price + pizza.getPrice();
 		OrderItem orderItem = new OrderItem();
 		orderItem.setPizza(pizza);
 		orderItem.setOrder(this);
 		orderItems.add(orderItem);
+	}
+	
+	public void addPizza(Pizza pizza, int quantity) {
+		System.out.println("--------------- Price: " + pizza.getPrice());
+		price = price + pizza.getPrice();
+		items.put(pizza, quantity);
 	}
 	
 	public Long getId() {
@@ -127,6 +151,14 @@ public class Order implements Serializable {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public Map<Pizza, Integer> getItems() {
+		return items;
+	}
+
+	public void setItems(Map<Pizza, Integer> items) {
+		this.items = items;
 	}
 
 

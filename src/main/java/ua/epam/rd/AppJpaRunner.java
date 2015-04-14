@@ -54,25 +54,27 @@ public class AppJpaRunner {
 		
 		// create Orders
 		Order order1 = new Order();
-		order1.addProduct(pizzas.get(0));
-		order1.addProduct(pizzas.get(1));
+		order1.addPizza(pizzas.get(0), 1);
+		order1.addPizza(pizzas.get(1), 2);
 		order1.setStatus(Status.NEW);
 		order1.setDate(new Date(new GregorianCalendar(2000, 0, 21).getTimeInMillis()));
 //		orderRepository.save(order1); // should not be persisted
 		
 		Order order2 = new Order();
-		order2.addProduct(pizzas.get(0));
-		order2.addProduct(pizzas.get(2));
+		order2.addPizza(pizzas.get(0), 5);
+		order2.addPizza(pizzas.get(2), 10);
 		order2.setStatus(Status.NEW);
 		order2.setDate(new Date(new GregorianCalendar(2008, 5, 10).getTimeInMillis()));
 //		orderRepository.save(order2); // should not be persisted
 		
 		Order order3 = new Order();
-		order3.addProduct(pizzas.get(1));
-		order3.addProduct(pizzas.get(2));
+		order3.addPizza(pizzas.get(1), 25);
+		order3.addPizza(pizzas.get(2), 4);
 		order3.setStatus(Status.NEW);
 		order3.setDate(new Date(new GregorianCalendar().getTimeInMillis()));
 //		orderRepository.save(order2); // should not be persisted
+		
+		
 		
 		// create Customers
 		Customer customer1 = new Customer();
@@ -88,15 +90,24 @@ public class AppJpaRunner {
 		customer2.setDeliveryAddress(new Address("Kiev", "Artema", "8"));
 		customerRepository.save(customer2); // persist orders by cascade
 		
-		
-		
 		// get some orders
 		Date dateFrom = new Date(new GregorianCalendar(2001, 0, 1).getTimeInMillis());
 		Date dateTo = new Date(new GregorianCalendar().getTimeInMillis());
 		List<Order> orders = orderRepository.findCustomerOrdersForPeriod(customer1, dateFrom, dateTo);
 		for (Order order : orders) {
 			System.out.println("Order: " + order);
+//			System.out.println("--- Pizzas:");
+//			for (Pizza pizza : order.getPrice()) {
+//				System.out.println("Pizza: " + pizza);
+//			}
 		}
+
+		List<Order> allOrders = orderRepository.getAllOrders();
+		Order orderById = orderRepository.getOrderById(0L);
+		System.out.println("----------------------------------------------------------");
+		System.out.println("Order(0): " + orderById);
+		System.out.println("----------------------------------------------------------");
+
 		
 		
 		// add additional pizzas to existing order

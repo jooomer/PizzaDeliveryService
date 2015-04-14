@@ -12,7 +12,7 @@ import ua.epam.rd.domain.Order;
 public interface OrderRepository { //extends JpaRepository<Order, Long> {
 
 	// Create
-	Long save(Order order);
+	Order save(Order order);
 
 	// Retrieve
 	Order getOrderById(Long id);
@@ -23,5 +23,7 @@ public interface OrderRepository { //extends JpaRepository<Order, Long> {
 
 	// Delete
 	void delete(Order order);
+
+	List<Order> getAllOrders();
 	
 }

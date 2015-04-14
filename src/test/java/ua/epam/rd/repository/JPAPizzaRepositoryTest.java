@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ua.epam.rd.domain.Order;
 import ua.epam.rd.domain.Pizza;
 import ua.epam.rd.domain.PizzaType;
 
@@ -20,9 +21,32 @@ public class JPAPizzaRepositoryTest extends UTRepositoryTestsTemplate {
     @Autowired
     private PizzaRepository pizzaRepository;
 
+//    @Test
+//    public void testSave() {
+//    	
+//    	// !!! clean table before and after every test
+//    	
+//    	jdbcTemplate.execute("insert ...");
+//    	
+//        Pizza pizza = new Pizza();
+//        pizza.setName("Meet");
+//        pizza.setType(PizzaType.MEET);
+//        pizza.setPrice(123.1);        
+//    	
+//        Order order = new Order();
+//        order.addItems(pizza, pizza);
+//        orderRepository.save(order);
+//        
+//        assertNotNull(id);
+//        
+ //       fail("The test case is a prototype.");
+//    
+//   }
+    
     @Test
     public void saveIfInputNewPizzaThenReturnNotNull() {
     	logger.info("saveIfInputNewPizzaThenReturnNotNull() started");
+    	
         Pizza pizza = new Pizza();
         pizza.setName("Meet");
         pizza.setType(PizzaType.MEET);

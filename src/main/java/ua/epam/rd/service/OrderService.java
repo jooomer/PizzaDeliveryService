@@ -9,6 +9,9 @@ import ua.epam.rd.domain.Pizza;
 
 public interface OrderService {
 	
+	Order placeOrder(Order order);
+
+	boolean cancelOrder(Long id, String email);
 
 
 }
