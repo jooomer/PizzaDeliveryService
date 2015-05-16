@@ -17,4 +17,6 @@ public interface PizzaService {
 
 	void save(Pizza pizza);
 
+	Pizza getPizzaById(Long id);
+
 }

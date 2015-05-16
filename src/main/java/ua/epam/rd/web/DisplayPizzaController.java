@@ -17,14 +17,19 @@ public class DisplayPizzaController {
 	@Autowired
 	private PizzaRepository pizzaRepository;
 	
-	@RequestMapping(value = "/pizzas", method = RequestMethod.GET)
+	@RequestMapping(value = "/pizzass", method = RequestMethod.GET)
 	public String displayAllPizzas(Model model) {
+		System.out.println("displayAllPizzas(Model model)");
 		List<Pizza> listOfPizzas = pizzaRepository.getAllPizzas();
-		for (Pizza pizza : listOfPizzas) {
-			System.out.println(pizza.toString());
+		if (listOfPizzas == null) {
+			System.out.println("listOfPizzas == null");
+		} else {
+			for (Pizza pizza : listOfPizzas) {
+				System.out.println(pizza.toString());
+			}
 		}
 		
-		return "";
+		return "index.jsp";
 	}
 
 }

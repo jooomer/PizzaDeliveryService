@@ -45,4 +45,10 @@ public class SimplePizzaService implements PizzaService {
 		
 	}
 
+	@Override
+	public Pizza getPizzaById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
